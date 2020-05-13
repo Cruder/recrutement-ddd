@@ -11,3 +11,11 @@ targets:
 crystal: 0.33.0
 
 license: MIT
+
+dependencies:
+  timecop:
+    github: crystal-community/timecop.cr
+
+development_dependencies:
+  spectator:
+    gitlab: arctic-fox/spectator

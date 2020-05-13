@@ -12,22 +12,26 @@ module Hiring
   # Then
   #   An interview is scheduled for the candidate with a recruiter tomorrow
   class ScheduleInterview
-    def call(candidate, recruiters, rooms)
+    def initialize(
+      @interview_repository : InterviewRepository,
+      @candidate_repository : CandidateRepository,
+      @recruiter_repository : RecruiterRepository,
+      @room_repository : RoomRepository
+    )
+    end
+
+    def call(request, recruiters, rooms)
       # Given
+      candidate = @candidate_repository.find_by_id(request.candidate_id)
+      recruiters = @recruiter_repository.for_month(TimeApplication.current.month)
+      rooms = @room_repository.all
 
       # When
-      available_recruiters = candidate.skills.map do |skill|
-        recruiters.select { |recruiter| recruiter.skills.includes?(skill) }
-      end.reduce(Array(Recruiter).new) do |acc, recruiters|
-        acc | recruiters
-      end.select do |recruiters|
-        recruiters.availabilities.any? do |availability|
-          availability.match?(candidate.availability)
-        end
-      end
+      inverview = Interview.new(candidte, recruiters, rooms)
+      interview.plan
 
       # Then
-
+      @interview_repository.add(interview)
     end
   end
 end
