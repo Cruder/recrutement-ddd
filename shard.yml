@@ -1,0 +1,13 @@
+name: recrutement-ddd
+version: 0.1.0
+
+authors:
+  - Alexandre Lairan <lairana@free.fr>
+
+targets:
+  recrutement-ddd:
+    main: src/recrutement-ddd.cr
+
+crystal: 0.33.0
+
+license: MIT
