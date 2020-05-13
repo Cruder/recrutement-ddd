@@ -1,7 +1,7 @@
 require "./repository"
 
-abstract class InterviewRepository
-  alias Model = Hiring::Interview
+abstract class RoomRepository
+  alias Model = Hiring::Room
 
   include Repository(Model)
 

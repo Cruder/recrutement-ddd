@@ -1,4 +1,4 @@
 require "./config/**"
-require "./infrastructure/**"
 require "./model/**"
+require "./infrastructure/**"
 require "./use_case/**"

@@ -20,14 +20,14 @@ module Hiring
     )
     end
 
-    def call(request, recruiters, rooms)
+    def call(request)
       # Given
       candidate = @candidate_repository.find_by_id(request.candidate_id)
-      recruiters = @recruiter_repository.for_month(TimeApplication.current.month)
+      recruiters = @recruiter_repository.for_month(Time.utc.month)
       rooms = @room_repository.all
 
       # When
-      inverview = Interview.new(candidte, recruiters, rooms)
+      interview = Interview.new(candidate, recruiters, rooms)
       interview.plan
 
       # Then
