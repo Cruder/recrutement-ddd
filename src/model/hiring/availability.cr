@@ -1,4 +1,3 @@
-
 module Hiring
   class Availability
     protected getter start_at : Time

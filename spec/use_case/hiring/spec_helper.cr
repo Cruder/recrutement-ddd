@@ -1,6 +1,5 @@
 require "../spec_helper"
 
-
 module InMemory
   module Repository(T)
     @data = Array(T).new
