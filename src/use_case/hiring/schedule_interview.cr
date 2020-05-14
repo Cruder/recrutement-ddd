@@ -20,7 +20,7 @@ module Hiring
     )
     end
 
-    def call(request)
+    def call(request) : DTO::Interview
       # Given
       candidate = @candidate_repository.find_by_id(request.candidate_id)
       recruiters = @recruiter_repository.for_month(Time.utc.month)
@@ -28,9 +28,12 @@ module Hiring
 
       # When
       interview = Interview.plan(candidate, recruiters)
+      data = interview.to_dto
 
       # Then
-      @interview_repository.add(interview.to_dto)
+      @interview_repository.add(data)
+
+      data
     end
   end
 end

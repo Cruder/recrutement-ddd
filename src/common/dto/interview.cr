@@ -1,4 +1,5 @@
 module DTO
   record Interview,
-    id : Int32
+    id : Int32?,
+    status : String
 end

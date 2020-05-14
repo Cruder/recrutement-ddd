@@ -7,4 +7,5 @@ abstract class CandidateRepository
 
   abstract def add(interview : Model)
   abstract def find_by_id(id)
+  abstract def find_by_name(name)
 end

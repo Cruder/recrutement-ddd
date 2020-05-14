@@ -14,7 +14,7 @@ module InMemory
   end
 end
 
-record FakeRequest, candidate_id : Int32
+record FakeRequest, candidate_id : Int32?
 
 class CandidateMemoryRepository < CandidateRepository
   include InMemory::Repository(DTO::Candidate)
