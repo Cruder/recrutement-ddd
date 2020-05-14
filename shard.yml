@@ -19,3 +19,5 @@ dependencies:
 development_dependencies:
   spectator:
     gitlab: arctic-fox/spectator
+  coverage:
+    github: anykeyh/crystal-coverage

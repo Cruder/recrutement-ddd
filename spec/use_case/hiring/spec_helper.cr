@@ -22,6 +22,10 @@ class CandidateMemoryRepository < CandidateRepository
   def find_by_id(id)
     all.select { |item| item.id == id }.first
   end
+
+  def find_by_name(name)
+    all.select { |item| item.name == name }.first
+  end
 end
 
 class InterviewMemoryRepository < InterviewRepository

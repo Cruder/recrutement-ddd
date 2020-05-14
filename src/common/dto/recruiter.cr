@@ -1,6 +1,6 @@
 module DTO
   record Recruiter,
-    id : Int32
-
+    id : Int32,
+    name : String
 
 end

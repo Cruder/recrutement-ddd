@@ -1,4 +1,6 @@
 module DTO
   record Availability,
-    id : Int32
+    person_id : Int32,
+    start_at : Time,
+    end_at : Time
 end

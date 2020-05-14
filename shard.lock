@@ -1,5 +1,9 @@
 version: 1.0
 shards:
+  coverage:
+    github: anykeyh/crystal-coverage
+    commit: e781f8c70812c9dc4d5bf1d1e396e1f5c9ef1051
+
   spectator:
     gitlab: arctic-fox/spectator
     version: 0.9.18
