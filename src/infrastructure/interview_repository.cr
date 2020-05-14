@@ -1,7 +1,7 @@
 require "./repository"
 
 abstract class InterviewRepository
-  alias Model = Hiring::Interview
+  alias Model = DTO::Interview
 
   include Repository(Model)
 

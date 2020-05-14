@@ -3,7 +3,9 @@ module Hiring
     getter skills : Array(Skill)
     getter availabilities : Array(Availability)
 
-    def initialize(@skills, @availabilities)
+    def initialize(data : DTO::Recruiter)
+      @skills = Array(Skill).new
+      @availabilities = Array(Availability).new
     end
   end
 end

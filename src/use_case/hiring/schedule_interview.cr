@@ -27,11 +27,10 @@ module Hiring
       rooms = @room_repository.all
 
       # When
-      interview = Interview.new(candidate, recruiters, rooms)
-      interview.plan
+      interview = Interview.plan(candidate, recruiters)
 
       # Then
-      @interview_repository.add(interview)
+      @interview_repository.add(interview.to_dto)
     end
   end
 end

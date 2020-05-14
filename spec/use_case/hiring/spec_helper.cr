@@ -17,7 +17,7 @@ end
 record FakeRequest, candidate_id : Int32
 
 class CandidateMemoryRepository < CandidateRepository
-  include InMemory::Repository(Hiring::Candidate)
+  include InMemory::Repository(DTO::Candidate)
 
   def find_by_id(id)
     all.select { |item| item.id == id }.first
@@ -25,11 +25,11 @@ class CandidateMemoryRepository < CandidateRepository
 end
 
 class InterviewMemoryRepository < InterviewRepository
-  include InMemory::Repository(Hiring::Interview)
+  include InMemory::Repository(DTO::Interview)
 end
 
 class RecruiterMemoryRepository < RecruiterRepository
-  include InMemory::Repository(Hiring::Recruiter)
+  include InMemory::Repository(DTO::Recruiter)
 
   def for_month(month)
     all
@@ -37,5 +37,5 @@ class RecruiterMemoryRepository < RecruiterRepository
 end
 
 class RoomMemoryRepository < RoomRepository
-  include InMemory::Repository(Hiring::Room)
+  include InMemory::Repository(DTO::Room)
 end

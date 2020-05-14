@@ -1,7 +1,7 @@
 require "./repository"
 
 abstract class RoomRepository
-  alias Model = Hiring::Room
+  alias Model = DTO::Room
 
   include Repository(Model)
 

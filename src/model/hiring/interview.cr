@@ -1,9 +1,12 @@
 module Hiring
   class Interview
+    def self.plan(candidate : DTO::Candidate, recruiters : Array(DTO::Recruiter))
+      new(Candidate.new(candidate), recruiters.map { |recruiter| Recruiter.new(recruiter) })
+    end
+
     def initialize(
       @candidate : Candidate,
       @recruiters : Array(Recruiter),
-      @rooms : Array(Room)
     )
     end
 
@@ -17,6 +20,10 @@ module Hiring
           availability.match?(@candidate.availability)
         end
       end
+    end
+
+    def to_dto
+      DTO::Interview.new(0)
     end
   end
 end
