@@ -16,7 +16,8 @@ module Hiring
 
     def call(request) : DTO::Report
       # Given
-
+        interview = @candidate_repository.find_by_id(request.interview_id)
+        recruiter = @recruiter_repository.find_by_id(request.recruiter_id)
 
       # When
 

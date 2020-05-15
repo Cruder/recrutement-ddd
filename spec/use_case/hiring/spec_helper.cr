@@ -38,8 +38,16 @@ class RecruiterMemoryRepository < RecruiterRepository
   def for_month(month)
     all
   end
+
+  def find_by_id(id)
+    all.select { |item| item.id == id }.first
+  end
 end
 
 class RoomMemoryRepository < RoomRepository
   include InMemory::Repository(DTO::Room)
+end
+
+class ReportMemoryRepository < ReportRepository
+  include InMemory::Repository(DTO::Report)
 end
