@@ -35,7 +35,7 @@ module Hiring
     end
 
     def cancel
-      @status = Status::Canceled
+      @status = Status::Canceled unless @status == Status::Finished
       self
     end
 

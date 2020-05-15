@@ -50,4 +50,28 @@ Spectator.describe Hiring::CancelInterview do
       expect(interview_repository.find_by_id(1).status).to eq "canceled"
     end
   end
+
+  context "with a canceled interview" do
+    let(interview_status) { "canceled" }
+
+    it { is_expected.to be_truthy }
+
+    it "cancels the interview" do
+      subject
+      expect(interview_repository.all.size).to eq 1
+      expect(interview_repository.find_by_id(1).status).to eq "canceled"
+    end
+  end
+
+  context "with a scheduled interview" do
+    let(interview_status) { "finished" }
+
+    it { is_expected.to be_truthy }
+
+    it "does not cancel the interview" do
+      subject
+      expect(interview_repository.all.size).to eq 1
+      expect(interview_repository.find_by_id(1).status).to eq "finished"
+    end
+  end
 end
