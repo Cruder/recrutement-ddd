@@ -10,15 +10,7 @@ module Hiring
       recruiters = recruiters.map { |recruiter| Recruiter.new(recruiter) }
       candidate = Candidate.new(candidate)
 
-      available_recruiters = candidate.skills.map do |skill|
-        recruiters.select { |recruiter| recruiter.skills.includes?(skill) }
-      end.reduce(Array(Recruiter).new) do |acc, recruiters|
-        acc | recruiters
-      end.select do |recruiters|
-        recruiters.availabilities.any? do |availability|
-          availability.match?(candidate.availability)
-        end
-      end
+      available_recruiters = recruiters.select &.match?(candidate)
 
       new(nil, candidate, available_recruiters.first, Status::Pending)
     end
@@ -36,18 +28,6 @@ module Hiring
       @candidate = Candidate.new(candidate)
       @recruiter = Recruiter.new(recruiter)
       @status = str_status(data.status)
-    end
-
-    def plan
-      available_recruiters = @candidate.skills.map do |skill|
-        recruiters.select { |recruiter| recruiter.skills.includes?(skill) }
-      end.reduce(Array(Recruiter).new) do |acc, recruiters|
-        acc | recruiters
-      end.select do |recruiters|
-        recruiters.availabilities.any? do |availability|
-          availability.match?(@candidate.availability)
-        end
-      end
     end
 
     def to_dto
