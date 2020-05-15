@@ -6,6 +6,10 @@ module Hiring
     Php
   end
 
+  def self.skill_to_dto(skill : Skill)
+    DTO::Skill.new(0, skill_to_string(skill))
+  end
+
   def self.dto_to_skill(data : DTO::Skill)
     case data.name
     when "java"   then Skill::Java
@@ -22,6 +26,7 @@ module Hiring
     when Skill::Python then "python"
     when Skill::CSharp then "c#"
     when Skill::Php    then "php"
+    else                    ""
     end
   end
 end

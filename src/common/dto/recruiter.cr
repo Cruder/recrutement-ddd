@@ -2,7 +2,7 @@ module DTO
   record Recruiter,
     id : Int32?,
     name : String,
-    skills : Array(Skill),
-    availabilities : Array(TimeSlot),
+    skills : Array(DTO::Skill),
+    availabilities : Array(DTO::TimeSlot),
     lvl_skills : Int32
 end

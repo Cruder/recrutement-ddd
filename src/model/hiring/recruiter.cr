@@ -7,8 +7,10 @@ module Hiring
     getter lvl_skills : Int32
 
     @name : String
+    @id : Int32?
 
     def initialize(data : DTO::Recruiter)
+      @id = data.id
       @lvl_skills = data.lvl_skills
       @name = data.name
       @skills = data.skills.map { |skill| Hiring.dto_to_skill(skill) }
@@ -21,6 +23,11 @@ module Hiring
 
     def free_availability(availability : TimeSlot)
       @availabilities << availability
+      @availabilities = TimeSlot.remerge(@availabilities)
+    end
+
+    def to_dto
+      DTO::Recruiter.new(@id, @name, skills.map { |skill| Hiring.skill_to_dto(skill) }, availabilities.map { |time_slot| time_slot.to_dto }, lvl_skills)
     end
 
     private def have_skills?(skills : Array(Skill))

@@ -19,7 +19,7 @@ Spectator.describe Hiring::CancelInterview do
   let(room_repository) { RoomMemoryRepository.new([room]) }
 
   let(interview) { DTO::Interview.new(1, interview_status, booked_date) }
-  let(candidate) { DTO::Candidate.new(1, "Arthur", [skill], availability, 1) }
+  let(candidate) { DTO::Candidate.new(1, "Arthur", [skill], booked_date, 1) }
   let(recruiter) { DTO::Recruiter.new(1, "Mathieu", [skill], [availability], 5) }
   let(room) { DTO::Room.new(1, "Big room", [booked_date]) }
 
@@ -36,6 +36,10 @@ Spectator.describe Hiring::CancelInterview do
       subject
       expect(interview_repository.all.size).to eq 1
       expect(interview_repository.find_by_id(1).status).to eq "canceled"
+
+      reloaded_recruiter = recruiter_repository.find_by_id(1)
+      new_availability = DTO::TimeSlot.new(Time.utc(2020, 1, 1, 16), Time.utc(2020, 1, 1, 20))
+      expect(reloaded_recruiter.availabilities).to eq([new_availability])
     end
   end
 
@@ -48,6 +52,10 @@ Spectator.describe Hiring::CancelInterview do
       subject
       expect(interview_repository.all.size).to eq 1
       expect(interview_repository.find_by_id(1).status).to eq "canceled"
+
+      reloaded_recruiter = recruiter_repository.find_by_id(1)
+      new_availability = DTO::TimeSlot.new(Time.utc(2020, 1, 1, 16), Time.utc(2020, 1, 1, 20))
+      expect(reloaded_recruiter.availabilities).to eq([new_availability])
     end
   end
 
@@ -60,6 +68,10 @@ Spectator.describe Hiring::CancelInterview do
       subject
       expect(interview_repository.all.size).to eq 1
       expect(interview_repository.find_by_id(1).status).to eq "canceled"
+
+      reloaded_recruiter = recruiter_repository.find_by_id(1)
+      new_availability = DTO::TimeSlot.new(Time.utc(2020, 1, 1, 16), Time.utc(2020, 1, 1, 20))
+      expect(reloaded_recruiter.availabilities).to eq([new_availability])
     end
   end
 
@@ -72,6 +84,9 @@ Spectator.describe Hiring::CancelInterview do
       subject
       expect(interview_repository.all.size).to eq 1
       expect(interview_repository.find_by_id(1).status).to eq "finished"
+
+      reloaded_recruiter = recruiter_repository.find_by_id(1)
+      expect(reloaded_recruiter.availabilities).to eq([availability])
     end
   end
 end
