@@ -46,17 +46,17 @@ module Hiring
       when Status::Created  then "created"
       when Status::Canceled then "canceled"
       when Status::Finished then "finished"
-      else "unknown"
+      else                       "unknown"
       end
     end
 
     private def str_status(str : String)
       case str
-      when "pending" then Status::Pending
-      when "created" then Status::Created
+      when "pending"  then Status::Pending
+      when "created"  then Status::Created
       when "canceled" then Status::Canceled
       when "finished" then Status::Finished
-      else raise "Invalid Status"
+      else                 raise "Invalid Status"
       end
     end
   end
