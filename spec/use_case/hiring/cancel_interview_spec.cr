@@ -19,8 +19,8 @@ Spectator.describe Hiring::CancelInterview do
   let(room_repository) { RoomMemoryRepository.new([room]) }
 
   let(interview) { DTO::Interview.new(1, interview_status) }
-  let(candidate) { DTO::Candidate.new(1, "Arthur", [skill], availability) }
-  let(recruiter) { DTO::Recruiter.new(1, "Mathieu", [skill], [availability]) }
+  let(candidate) { DTO::Candidate.new(1, "Arthur", [skill], availability, 1) }
+  let(recruiter) { DTO::Recruiter.new(1, "Mathieu", [skill], [availability], 5) }
   let(room) { DTO::Room.new(1, "Big room") }
 
   let(skill) { DTO::Skill.new(1, "java") }
