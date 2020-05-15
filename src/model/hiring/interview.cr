@@ -30,18 +30,6 @@ module Hiring
       @status = str_status(data.status)
     end
 
-    def plan
-      available_recruiters = @candidate.skills.map do |skill|
-        recruiters.select { |recruiter| recruiter.skills.includes?(skill) }
-      end.reduce(Array(Recruiter).new) do |acc, recruiters|
-        acc | recruiters
-      end.select do |recruiters|
-        recruiters.availabilities.any? do |availability|
-          availability.match?(@candidate.availability)
-        end
-      end
-    end
-
     def to_dto
       DTO::Interview.new(@id, status_str)
     end
