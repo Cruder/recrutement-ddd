@@ -9,6 +9,11 @@ module Hiring
     @name : String
     @id : Int32?
 
+    def self.plan(recruiter_dto : DTO::Recruiter, time_slot_dto : DTO::TimeSlot)
+      recruiter_dto.availabilities -= [time_slot_dto]
+      new(recruiter_dto)
+    end
+
     def initialize(data : DTO::Recruiter)
       @id = data.id
       @lvl_skills = data.lvl_skills

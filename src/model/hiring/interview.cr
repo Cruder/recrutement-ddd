@@ -7,6 +7,8 @@ module Hiring
       Finished
     end
 
+    getter recruiter : Recruiter
+
     def self.plan(candidate : DTO::Candidate, recruiters : Array(DTO::Recruiter))
       recruiters = recruiters.map { |recruiter| Recruiter.new(recruiter) }
       candidate = Candidate.new(candidate)

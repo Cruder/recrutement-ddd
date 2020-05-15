@@ -4,5 +4,7 @@ module DTO
     name : String,
     skills : Array(DTO::Skill),
     availabilities : Array(DTO::TimeSlot),
-    lvl_skills : Int32
+    lvl_skills : Int32 do
+      setter availabilities : Array(DTO::TimeSlot)
+    end
 end

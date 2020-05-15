@@ -47,6 +47,9 @@ Spectator.describe Hiring::ScheduleInterview do
 
       room = room_repository.all.last
       expect(room.booked_dates).to eq [availability_1, availability_2]
+
+      recruiter = recruiter_repository.find_by_id(1)
+      expect(recruiter.availabilities).to eq [availability_1]
     end
   end
 
@@ -59,6 +62,9 @@ Spectator.describe Hiring::ScheduleInterview do
 
       room = room_repository.all.last
       expect(room.booked_dates).to eq [availability_2]
+
+      recruiter = recruiter_repository.find_by_id(1)
+      expect(recruiter.availabilities).to eq [availability_1, availability_2]
     end
   end
 end

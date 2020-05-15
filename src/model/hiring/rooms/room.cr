@@ -10,7 +10,6 @@ module Hiring
         room_available = rooms.find do |room|
           room.booked_dates.none? { |date| date.start_at <= booked_on.start_at && date.end_at >= booked_on.end_at }
         end
-        pp! room_available
 
         if room_available
           room_available.booked_dates << booked_on

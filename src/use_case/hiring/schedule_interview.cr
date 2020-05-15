@@ -29,21 +29,19 @@ module Hiring
       # When
       interview = Interview.plan(candidate, recruiters)
       interview_dto = interview.to_dto
-      room = Rooms::Room.booking(rooms, interview_dto.booked_date)
+      room = Rooms::Room.booking(rooms, candidate.availability)
       room_dto = room && room.to_dto
+      recruiter = Recruiter.plan(interview.recruiter.to_dto, candidate.availability)
+      recruiter_dto = recruiter.to_dto
 
       # Then
       if room_dto
         @room_repository.update(room_dto)
         @interview_repository.add(interview_dto)
+        @recruiter_repository.update(recruiter_dto)
       end
 
       interview_dto
     end
   end
 end
-
-# room
-#
-# reserve
-# release
