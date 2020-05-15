@@ -35,8 +35,13 @@ Spectator.describe Hiring::ScheduleInterview do
 
   context "with a java candidate" do
     it { is_expected.to be_truthy }
+
     it "adds an interview" do
       expect { subject }.to change { interview_repository.all.size }.by(1)
+
+      interview = interview_repository.all.last
+      expect(interview.status).to eq "pending"
+      expect(interview.booked_date).to eq availability_2
     end
   end
 end

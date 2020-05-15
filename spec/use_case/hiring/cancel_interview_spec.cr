@@ -31,6 +31,7 @@ Spectator.describe Hiring::CancelInterview do
     let(interview_status) { "pending" }
 
     it { is_expected.to be_truthy }
+
     it "cancels the interview" do
       subject
       expect(interview_repository.all.size).to eq 1
@@ -42,6 +43,7 @@ Spectator.describe Hiring::CancelInterview do
     let(interview_status) { "created" }
 
     it { is_expected.to be_truthy }
+
     it "cancels the interview" do
       subject
       expect(interview_repository.all.size).to eq 1
