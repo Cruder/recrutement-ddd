@@ -12,15 +12,25 @@ module Hiring
   #   The candidate is free tomorrow at 2:00pm
   #   The recruiter is free tomorrow at 2:00pm
   class CancelInterview
-    def initialize(@interview_repository : InterviewRepository)
+    def initialize(
+      @interview_repository : InterviewRepository,
+      @recruiter_repository : RecruiterRepository,
+      @candidate_repository : CandidateRepository,
+      @room_repository : RoomRepository
+    )
     end
 
     def call(request) : DTO::Interview
       # Given
-      interview = @interview_repository.find_by_id(request.interview_id)
+      recruiter_dto = @recruiter_repository.find_by_id(request.recruiter_id)
+      candidate_dto = @candidate_repository.find_by_id(request.candidate_id)
+      room_dto = @room_repository.find_by_id(request.room_id)
+      interview_dto = @interview_repository.find_by_id(request.interview_id)
+
 
       # When
-      data = interview.cancel.to_dto
+      canceled_interview = Interview.new(interview_dto, candidate_dto, recruiter_dto).cancel
+      data = canceled_interview.to_dto
 
       # Then
       @interview_repository.update(data)

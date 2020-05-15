@@ -15,6 +15,10 @@ module InMemory
       @data
     end
 
+    def find_by_id(id)
+      all.select { |item| item.id == id }.first
+    end
+
     def update(model : T)
       @data.reject! { |item| item.id == model.id }
       add(model)
@@ -27,10 +31,6 @@ record FakeRequest, candidate_id : Int32?
 class CandidateMemoryRepository < CandidateRepository
   include InMemory::Repository(DTO::Candidate)
 
-  def find_by_id(id)
-    all.select { |item| item.id == id }.first
-  end
-
   def find_by_name(name)
     all.select { |item| item.name == name }.first
   end
@@ -38,10 +38,6 @@ end
 
 class InterviewMemoryRepository < InterviewRepository
   include InMemory::Repository(DTO::Interview)
-
-  def find_by_id(id)
-    all.select { |item| item.id == id }.first
-  end
 end
 
 class RecruiterMemoryRepository < RecruiterRepository
@@ -49,10 +45,6 @@ class RecruiterMemoryRepository < RecruiterRepository
 
   def for_month(month)
     all
-  end
-
-  def find_by_id(id)
-    all.select { |item| item.id == id }.first
   end
 end
 

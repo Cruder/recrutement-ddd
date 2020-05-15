@@ -33,6 +33,7 @@ module Hiring
 
     def cancel
       @status = Status::Canceled
+      self
     end
 
     def to_dto
