@@ -3,6 +3,7 @@ module Hiring
     enum Status
       Pending
       Created
+      Canceled
       Finished
     end
 
@@ -30,6 +31,10 @@ module Hiring
       @status = str_status(data.status)
     end
 
+    def cancel
+      @status = Status::Canceled
+    end
+
     def to_dto
       DTO::Interview.new(@id, status_str)
     end
@@ -38,6 +43,7 @@ module Hiring
       case @status
       when Status::Pending  then "pending"
       when Status::Created  then "created"
+      when Status::Canceled then "canceled"
       when Status::Finished then "finished"
       else "unknown"
       end
@@ -47,6 +53,7 @@ module Hiring
       case str
       when "pending" then Status::Pending
       when "created" then Status::Created
+      when "canceled" then Status::Canceled
       when "finished" then Status::Finished
       else raise "Invalid Status"
       end

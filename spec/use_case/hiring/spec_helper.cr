@@ -14,6 +14,11 @@ module InMemory
     def all : Array(T)
       @data
     end
+
+    def update(model : T)
+      @data.reject! { |item| item.id == model.id }
+      add(model)
+    end
   end
 end
 
@@ -33,6 +38,10 @@ end
 
 class InterviewMemoryRepository < InterviewRepository
   include InMemory::Repository(DTO::Interview)
+
+  def find_by_id(id)
+    all.select { |item| item.id == id }.first
+  end
 end
 
 class RecruiterMemoryRepository < RecruiterRepository
