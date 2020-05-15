@@ -36,7 +36,6 @@ module Hiring
 
     def cancel
       @status = Status::Canceled unless @status == Status::Finished
-      self
     end
 
     def to_dto

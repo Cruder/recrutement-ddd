@@ -26,15 +26,21 @@ module Hiring
       candidate_dto = @candidate_repository.find_by_id(request.candidate_id)
       room_dto = @room_repository.find_by_id(request.room_id)
       interview_dto = @interview_repository.find_by_id(request.interview_id)
+      interview = Interview.new(interview_dto, candidate_dto, recruiter_dto)
 
       # When
-      canceled_interview = Interview.new(interview_dto, candidate_dto, recruiter_dto).cancel
-      data = canceled_interview.to_dto
+      interview.cancel
+      interview_dto = interview.to_dto
 
       # Then
-      @interview_repository.update(data)
+      # if interview_dto.status == "canceled"
+         # Free room
+         # Free candidate
+         # free recruiter
 
-      data
+      @interview_repository.update(interview_dto)
+
+      interview_dto
     end
   end
 end

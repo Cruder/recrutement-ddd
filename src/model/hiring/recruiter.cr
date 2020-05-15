@@ -19,6 +19,10 @@ module Hiring
       have_skills?(candidate.skills) && available?(candidate.availability) && more_senior?(candidate.lvl_skills)
     end
 
+    def free_availability(availability : TimeSlot)
+      @availabilities << availability
+    end
+
     private def have_skills?(skills : Array(Skill))
       (skills - @skills).empty?
     end
