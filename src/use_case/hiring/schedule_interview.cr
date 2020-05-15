@@ -28,22 +28,20 @@ module Hiring
 
       # When
       interview = Interview.plan(candidate, recruiters)
-      data = interview.to_dto
-      # room
+      interview_dto = interview.to_dto
+      room = Rooms::Room.booking(rooms, interview_dto.booked_date)
+      room_dto = room && room.to_dto
 
       # Then
-      @interview_repository.add(data)
+      if room_dto
+        @room_repository.update(room_dto)
+        @interview_repository.add(interview_dto)
+      end
 
-      data
+      interview_dto
     end
   end
 end
-
-# 4 cas d'utilisation
-# anuler
-# plan
-# confirm
-# re-plan
 
 # room
 #

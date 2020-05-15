@@ -32,7 +32,7 @@ Spectator.describe Hiring::CancelInterview do
 
     it { is_expected.to be_truthy }
 
-    it "cancels the interview" do
+    it "cancels the interview and free the recruiter" do
       subject
       expect(interview_repository.all.size).to eq 1
       expect(interview_repository.find_by_id(1).status).to eq "canceled"
@@ -48,7 +48,7 @@ Spectator.describe Hiring::CancelInterview do
 
     it { is_expected.to be_truthy }
 
-    it "cancels the interview" do
+    it "cancels the interview and free the recruiter" do
       subject
       expect(interview_repository.all.size).to eq 1
       expect(interview_repository.find_by_id(1).status).to eq "canceled"
@@ -64,7 +64,7 @@ Spectator.describe Hiring::CancelInterview do
 
     it { is_expected.to be_truthy }
 
-    it "cancels the interview" do
+    it "cancels the interview and free the recruiter" do
       subject
       expect(interview_repository.all.size).to eq 1
       expect(interview_repository.find_by_id(1).status).to eq "canceled"
