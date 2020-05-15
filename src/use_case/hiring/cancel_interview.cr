@@ -34,9 +34,9 @@ module Hiring
 
       # Then
       # if interview_dto.status == "canceled"
-         # Free room
-         # Free candidate
-         # free recruiter
+      # Free room
+      # Free candidate
+      # free recruiter
 
       @interview_repository.update(interview_dto)
 
