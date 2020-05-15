@@ -4,6 +4,9 @@ module InMemory
   module Repository(T)
     @data = Array(T).new
 
+    def initialize(@data = Array(T).new)
+    end
+
     def add(model : T)
       @data << model
     end

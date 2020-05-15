@@ -4,8 +4,8 @@ module Hiring
     getter availability : Availability
 
     def initialize(data : DTO::Candidate)
-      @skills = Array(Skill).new
-      @availability = Availability.new(Time.utc, Time.utc)
+      @skills = data.skills.map { |skill| Hiring.dto_to_skill(skill) }
+      @availability = Availability.new(data.availability)
     end
 
     def id
