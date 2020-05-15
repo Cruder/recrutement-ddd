@@ -1,5 +1,6 @@
 module DTO
   record Interview,
     id : Int32?,
-    status : String
+    status : String,
+    booked_date : DTO::TimeSlot
 end

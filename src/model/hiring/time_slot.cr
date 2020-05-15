@@ -28,5 +28,9 @@ module Hiring
     def ==(availability : TimeSlot)
       start_at == availability.start_at && end_at == availability.end_at
     end
+
+    def to_dto
+      DTO::TimeSlot.new(start_at, end_at)
+    end
   end
 end

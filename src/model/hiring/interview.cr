@@ -13,14 +13,16 @@ module Hiring
 
       available_recruiters = recruiters.select &.match?(candidate)
 
-      new(nil, candidate, available_recruiters.first, Status::Pending)
+      time_slot = candidate.availability
+      new(nil, candidate, available_recruiters.first, Status::Pending, time_slot)
     end
 
     def initialize(
       @id : Int32?,
       @candidate : Candidate,
       @recruiter : Recruiter,
-      @status : Status
+      @status : Status,
+      @booked_date : TimeSlot
     )
     end
 
@@ -29,6 +31,7 @@ module Hiring
       @candidate = Candidate.new(candidate)
       @recruiter = Recruiter.new(recruiter)
       @status = str_status(data.status)
+      @booked_date = TimeSlot.new(data.booked_date)
     end
 
     def cancel
@@ -37,7 +40,7 @@ module Hiring
     end
 
     def to_dto
-      DTO::Interview.new(@id, status_str)
+      DTO::Interview.new(@id, status_str, @booked_date.to_dto)
     end
 
     private def status_str
