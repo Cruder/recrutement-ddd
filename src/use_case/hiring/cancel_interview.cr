@@ -1,10 +1,16 @@
 module Hiring
   # Given
   #   A pending | created interview
+  #   assigned to a room
+  #   tomorrow at 2:00pm
+  #   between a recruiter and a candidate
   # When
-  #   The HR cancels the interview
+  #   The HR | Recruiter cancels the interview
   # Then
   #   The interview is canceled
+  #   The room is free tomorrow at 2:00pm
+  #   The candidate is free tomorrow at 2:00pm
+  #   The recruiter is free tomorrow at 2:00pm
   class CancelInterview
     def initialize(@interview_repository : InterviewRepository)
     end
