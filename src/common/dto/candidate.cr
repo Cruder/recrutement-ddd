@@ -3,6 +3,6 @@ module DTO
     id : Int32?,
     name : String,
     skills : Array(Skill),
-    availability : Availability,
+    availability : TimeSlot,
     lvl_skills : Int32
 end

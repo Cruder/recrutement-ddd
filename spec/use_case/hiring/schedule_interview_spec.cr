@@ -29,9 +29,9 @@ Spectator.describe Hiring::ScheduleInterview do
     DTO::Recruiter.new(3, "Thomas", [skill_python], [availability_2, availability_3], 10)
   end
 
-  let(availability_1) { DTO::Availability.new(Time.utc(2020, 1, 1, 18), Time.utc(2020, 1, 1, 20)) }
-  let(availability_2) { DTO::Availability.new(Time.utc(2020, 1, 2, 17), Time.utc(2020, 1, 2, 20)) }
-  let(availability_3) { DTO::Availability.new(Time.utc(2020, 1, 3, 17), Time.utc(2020, 1, 3, 20)) }
+  let(availability_1) { DTO::TimeSlot.new(Time.utc(2020, 1, 1, 18), Time.utc(2020, 1, 1, 20)) }
+  let(availability_2) { DTO::TimeSlot.new(Time.utc(2020, 1, 2, 17), Time.utc(2020, 1, 2, 20)) }
+  let(availability_3) { DTO::TimeSlot.new(Time.utc(2020, 1, 3, 17), Time.utc(2020, 1, 3, 20)) }
 
   context "with a java candidate" do
     it { is_expected.to be_truthy }

@@ -1,8 +1,8 @@
 require "./spec_helper"
 
-Spectator.describe Hiring::Availability do
-  describe ".make_busy_time" do
-    subject { described_class.make_busy_time(actual, busy) }
+Spectator.describe Hiring::TimeSlot do
+  describe ".split_with" do
+    subject { described_class.split_with(actual, busy) }
 
     let(actual) { described_class.new(Time.utc(2020, 1, 10, 10), Time.utc(2020, 1, 10, 13)) }
     let(busy) { described_class.new(Time.utc(2020, 1, 10, 11), Time.utc(2020, 1, 10, 12)) }
@@ -18,13 +18,13 @@ Spectator.describe Hiring::Availability do
   describe "#initialize" do
     context "from DTO" do
       subject { described_class.new(data) }
-      let(data) { DTO::Availability.new(start_at, end_at) }
+      let(data) { DTO::TimeSlot.new(start_at, end_at) }
 
       context "nominal case" do
         let(start_at) { Time.utc(2020, 1, 10, 10) }
         let(end_at) { Time.utc(2020, 1, 10, 11) }
 
-        it { is_expected.to be_a(Hiring::Availability) }
+        it { is_expected.to be_a(Hiring::TimeSlot) }
       end
 
       context "starts on weekend" do
@@ -56,7 +56,7 @@ Spectator.describe Hiring::Availability do
         let(start_at) { Time.utc(2020, 1, 10, 10) }
         let(end_at) { Time.utc(2020, 1, 10, 11) }
 
-        it { is_expected.to be_a(Hiring::Availability) }
+        it { is_expected.to be_a(Hiring::TimeSlot) }
       end
 
       context "starts on weekend" do
@@ -83,24 +83,24 @@ Spectator.describe Hiring::Availability do
   end
 
   describe "#match?" do
-    subject { availability.match?(variant) }
+    subject { time_slot.match?(variant) }
 
-    let(availability) { Hiring::Availability.new(Time.utc(2020, 1, 10, 10), Time.utc(2020, 1, 10, 18)) }
+    let(time_slot) { Hiring::TimeSlot.new(Time.utc(2020, 1, 10, 10), Time.utc(2020, 1, 10, 18)) }
 
     context "included inside" do
-      let(variant) { Hiring::Availability.new(Time.utc(2020, 1, 10, 12), Time.utc(2020, 1, 10, 14)) }
+      let(variant) { Hiring::TimeSlot.new(Time.utc(2020, 1, 10, 12), Time.utc(2020, 1, 10, 14)) }
 
       it { is_expected.to be_truthy }
     end
 
     context "with start before" do
-      let(variant) { Hiring::Availability.new(Time.utc(2020, 1, 10, 9), Time.utc(2020, 1, 10, 14)) }
+      let(variant) { Hiring::TimeSlot.new(Time.utc(2020, 1, 10, 9), Time.utc(2020, 1, 10, 14)) }
 
       it { is_expected.to be_falsey }
     end
 
     context "with end after" do
-      let(variant) { Hiring::Availability.new(Time.utc(2020, 1, 10, 12), Time.utc(2020, 1, 10, 19)) }
+      let(variant) { Hiring::TimeSlot.new(Time.utc(2020, 1, 10, 12), Time.utc(2020, 1, 10, 19)) }
 
       it { is_expected.to be_falsey }
     end

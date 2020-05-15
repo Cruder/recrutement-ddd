@@ -3,7 +3,7 @@ require "./skill"
 module Hiring
   class Recruiter
     getter skills : Array(Skill)
-    getter availabilities : Array(Availability)
+    getter availabilities : Array(TimeSlot)
     getter lvl_skills : Int32
 
     @name : String
@@ -12,7 +12,7 @@ module Hiring
       @lvl_skills = data.lvl_skills
       @name = data.name
       @skills = data.skills.map { |skill| Hiring.dto_to_skill(skill) }
-      @availabilities = data.availabilities.map { |availability| Availability.new(availability) }
+      @availabilities = data.availabilities.map { |availability| TimeSlot.new(availability) }
     end
 
     def match?(candidate : Candidate)
@@ -23,7 +23,7 @@ module Hiring
       (skills - @skills).empty?
     end
 
-    private def available?(availability : Availability)
+    private def available?(availability : TimeSlot)
       availabilities.any? do |segment|
         segment.match?(availability)
       end

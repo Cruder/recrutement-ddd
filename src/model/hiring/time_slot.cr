@@ -1,16 +1,16 @@
 module Hiring
-  class Availability
+  class TimeSlot
     protected getter start_at : Time
     protected getter end_at : Time
 
-    def self.make_busy_time(actual, busy) : {Availability, Availability}
-      beginning = Availability.new(actual.start_at, busy.start_at)
-      ending = Availability.new(busy.end_at, actual.end_at)
+    def self.split_with(actual, busy) : {TimeSlot, TimeSlot}
+      beginning = TimeSlot.new(actual.start_at, busy.start_at)
+      ending = TimeSlot.new(busy.end_at, actual.end_at)
 
       {beginning, ending}
     end
 
-    def initialize(availability : DTO::Availability)
+    def initialize(availability : DTO::TimeSlot)
       initialize(availability.start_at, availability.end_at)
     end
 
@@ -20,12 +20,12 @@ module Hiring
       raise "end_at must be greater than start_at" if @end_at < @start_at
     end
 
-    def match?(availability : Availability)
+    def match?(availability : TimeSlot)
       start_at <= availability.start_at &&
         end_at >= availability.end_at
     end
 
-    def ==(availability : Availability)
+    def ==(availability : TimeSlot)
       start_at == availability.start_at && end_at == availability.end_at
     end
   end

@@ -4,7 +4,7 @@ Spectator.describe Hiring::Recruiter do
   context "setup from DTO" do
     subject { described_class.new(data) }
 
-    let(data) { DTO::Recruiter.new(id: 0, name: "Stan", skills: Array(DTO::Skill).new, availabilities: [DTO::Availability.new(Time.utc, Time.utc)], lvl_skills: 10) }
+    let(data) { DTO::Recruiter.new(id: 0, name: "Stan", skills: Array(DTO::Skill).new, availabilities: [DTO::TimeSlot.new(Time.utc, Time.utc)], lvl_skills: 10) }
 
     it { is_expected.to be_a(Hiring::Recruiter) }
   end
@@ -19,10 +19,10 @@ Spectator.describe Hiring::Recruiter do
       let(recruiter_lvl_skills) { 10 }
       let(candidate_lvl_skills) { 9 }
       let(recruiter_skills) { Array(DTO::Skill).new }
-      let(recruiter_availabilities) { [DTO::Availability.new(Time.utc(2020, 1, 1, 14), Time.utc(2020, 1, 1, 15))] }
+      let(recruiter_availabilities) { [DTO::TimeSlot.new(Time.utc(2020, 1, 1, 14), Time.utc(2020, 1, 1, 15))] }
 
       let(candidate_skills) { Array(DTO::Skill).new }
-      let(candidate_availability) { DTO::Availability.new(Time.utc(2020, 1, 1, 14), Time.utc(2020, 1, 1, 14, 15)) }
+      let(candidate_availability) { DTO::TimeSlot.new(Time.utc(2020, 1, 1, 14), Time.utc(2020, 1, 1, 14, 15)) }
 
       it {
         is_expected.to be_truthy
@@ -32,7 +32,7 @@ Spectator.describe Hiring::Recruiter do
     context "match with candidate skills" do
       let(recruiter_lvl_skills) { 10 }
       let(candidate_lvl_skills) { 9 }
-      let(time) { DTO::Availability.new(Time.utc, Time.utc) }
+      let(time) { DTO::TimeSlot.new(Time.utc, Time.utc) }
 
       let(recruiter_skills) { [DTO::Skill.new(0, "php"), DTO::Skill.new(1, "c#")] }
       let(recruiter_availabilities) { [time] }
@@ -48,7 +48,7 @@ Spectator.describe Hiring::Recruiter do
     context "match with candidate skill when have more" do
       let(recruiter_lvl_skills) { 10 }
       let(candidate_lvl_skills) { 9 }
-      let(time) { DTO::Availability.new(Time.utc, Time.utc) }
+      let(time) { DTO::TimeSlot.new(Time.utc, Time.utc) }
 
       let(recruiter_skills) { [DTO::Skill.new(0, "php"), DTO::Skill.new(1, "c#")] }
       let(recruiter_availabilities) { [time] }
@@ -64,7 +64,7 @@ Spectator.describe Hiring::Recruiter do
     context "not match with candidate skills" do
       let(recruiter_lvl_skills) { 10 }
       let(candidate_lvl_skills) { 9 }
-      let(time) { DTO::Availability.new(Time.utc, Time.utc) }
+      let(time) { DTO::TimeSlot.new(Time.utc, Time.utc) }
 
       let(recruiter_skills) { [DTO::Skill.new(0, "php")] }
       let(recruiter_availabilities) { [time] }
@@ -81,7 +81,7 @@ Spectator.describe Hiring::Recruiter do
       let(recruiter_lvl_skills) { 10 }
       let(candidate_lvl_skills) { 9 }
 
-      let(time) { DTO::Availability.new(Time.utc, Time.utc) }
+      let(time) { DTO::TimeSlot.new(Time.utc, Time.utc) }
 
       let(recruiter_skills) { Array(DTO::Skill).new }
       let(recruiter_availabilities) { [time] }
@@ -98,7 +98,7 @@ Spectator.describe Hiring::Recruiter do
       let(recruiter_lvl_skills) { 10 }
       let(candidate_lvl_skills) { 10 }
 
-      let(time) { DTO::Availability.new(Time.utc, Time.utc) }
+      let(time) { DTO::TimeSlot.new(Time.utc, Time.utc) }
 
       let(recruiter_skills) { Array(DTO::Skill).new }
       let(recruiter_availabilities) { [time] }
@@ -115,7 +115,7 @@ Spectator.describe Hiring::Recruiter do
       let(recruiter_lvl_skills) { 10 }
       let(candidate_lvl_skills) { 11 }
 
-      let(time) { DTO::Availability.new(Time.utc, Time.utc) }
+      let(time) { DTO::TimeSlot.new(Time.utc, Time.utc) }
 
       let(recruiter_skills) { Array(DTO::Skill).new }
       let(recruiter_availabilities) { [time] }
@@ -132,7 +132,7 @@ Spectator.describe Hiring::Recruiter do
       let(recruiter_lvl_skills) { 10 }
       let(candidate_lvl_skills) { 10 }
 
-      let(time) { DTO::Availability.new(Time.utc, Time.utc) }
+      let(time) { DTO::TimeSlot.new(Time.utc, Time.utc) }
 
       let(recruiter_skills) { [DTO::Skill.new(0, "php"), DTO::Skill.new(1, "c#")] }
       let(recruiter_availabilities) { [time] }
@@ -149,7 +149,7 @@ Spectator.describe Hiring::Recruiter do
       let(recruiter_lvl_skills) { 10 }
       let(candidate_lvl_skills) { 10 }
 
-      let(time) { DTO::Availability.new(Time.utc, Time.utc) }
+      let(time) { DTO::TimeSlot.new(Time.utc, Time.utc) }
 
       let(recruiter_skills) { [DTO::Skill.new(0, "php")] }
       let(recruiter_availabilities) { [time] }
@@ -166,7 +166,7 @@ Spectator.describe Hiring::Recruiter do
       let(recruiter_lvl_skills) { 10 }
       let(candidate_lvl_skills) { 10 }
 
-      let(time) { DTO::Availability.new(Time.utc, Time.utc) }
+      let(time) { DTO::TimeSlot.new(Time.utc, Time.utc) }
 
       let(recruiter_skills) { [DTO::Skill.new(0, "php"), DTO::Skill.new(1, "c#")] }
       let(recruiter_availabilities) { [time] }
