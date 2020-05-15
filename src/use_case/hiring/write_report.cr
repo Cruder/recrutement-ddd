@@ -1,16 +1,14 @@
 module Hiring
   # Given
-  #
-  # And
-  #
+  #   An interview between a recruiter and a candidate
   # When
-  #
+  #   the interview ends
   # Then
+  #   The recruiter writes a report
   #
   class WriteReport
     def initialize(
       @interview_repository : InterviewRepository,
-      @candidate_repository : CandidateRepository,
       @recruiter_repository : RecruiterRepository,
       @report_repository : ReportRepository,
     )
