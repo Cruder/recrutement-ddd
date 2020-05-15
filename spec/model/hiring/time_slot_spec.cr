@@ -16,11 +16,54 @@ Spectator.describe Hiring::TimeSlot do
   end
 
   describe ".remerge" do
-    subject { described_class.remerge(time_slots)}
+    subject { described_class.remerge(time_slots) }
 
-    let(time_slots) { [Hiring::TimeSlot.new(Time.utc, Time.utc)] }
+    context "one time slot" do
+      let(time_slots) { [Hiring::TimeSlot.new(Time.utc, Time.utc)] }
 
-    it { is_expected.to eq(time_slots) }
+      it { is_expected.to eq(time_slots) }
+    end
+
+    context "two time slot with end and start equal" do
+      let(time_slots) { [
+        Hiring::TimeSlot.new(Time.utc(2020, 1, 13, 10), Time.utc(2020, 1, 15, 14)),
+        Hiring::TimeSlot.new(Time.utc(2020, 1, 15, 14), Time.utc(2020, 1, 17, 16)),
+      ] }
+      it { is_expected.to eq([Hiring::TimeSlot.new(Time.utc(2020, 1, 13, 10), Time.utc(2020, 1, 17, 16))]) }
+    end
+
+    context "three time slot with end and start equal" do
+      let(time_slots) { [
+        Hiring::TimeSlot.new(Time.utc(2020, 1, 13, 10), Time.utc(2020, 1, 15, 16)),
+        Hiring::TimeSlot.new(Time.utc(2020, 1, 15, 16), Time.utc(2020, 1, 16, 17)),
+        Hiring::TimeSlot.new(Time.utc(2020, 1, 16, 17), Time.utc(2020, 1, 17, 6)),
+      ] }
+      it { is_expected.to eq([Hiring::TimeSlot.new(Time.utc(2020, 1, 13, 10), Time.utc(2020, 1, 17, 6))]) }
+    end
+
+    context "three time slot with different timeslot remarge before" do
+      let(time_slots) { [
+        Hiring::TimeSlot.new(Time.utc(2020, 1, 13, 17), Time.utc(2020, 1, 15, 16)),
+        Hiring::TimeSlot.new(Time.utc(2020, 1, 17, 14), Time.utc(2020, 1, 20, 12)),
+        Hiring::TimeSlot.new(Time.utc(2020, 1, 20, 12), Time.utc(2020, 1, 22, 15)),
+      ] }
+      it { is_expected.to eq([
+        Hiring::TimeSlot.new(Time.utc(2020, 1, 13, 17), Time.utc(2020, 1, 15, 16)),
+        Hiring::TimeSlot.new(Time.utc(2020, 1, 17, 14), Time.utc(2020, 1, 22, 15)),
+      ]) }
+    end
+
+    context "three time slot with different timeslot remarge after" do
+      let(time_slots) { [
+        Hiring::TimeSlot.new(Time.utc(2020, 1, 13, 10), Time.utc(2020, 1, 17, 12)),
+        Hiring::TimeSlot.new(Time.utc(2020, 1, 17, 12), Time.utc(2020, 1, 20, 12)),
+        Hiring::TimeSlot.new(Time.utc(2020, 1, 24, 17), Time.utc(2020, 1, 27, 18)),
+      ] }
+      it { is_expected.to eq([
+        Hiring::TimeSlot.new(Time.utc(2020, 1, 13, 10), Time.utc(2020, 1, 20, 12)),
+        Hiring::TimeSlot.new(Time.utc(2020, 1, 24, 17), Time.utc(2020, 1, 27, 18)),
+      ]) }
+    end
   end
 
   describe "#initialize" do

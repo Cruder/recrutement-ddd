@@ -15,13 +15,10 @@ module Hiring
 
     def call(request) : DTO::Interview
       # Given
-      available_rooms = @room_repository.all.select do |item|
-        conflicting_dates = item.booked_dates.select &.matches?(request.creneau)
-        conflicting_dates.empty?
-      end
+      rooms = @room_repository
+
       # When
-      room_to_book = available_rooms.first
-      room = Room.booking(room_to_book, request.creneau)
+      room = Room.booking(rooms, request.creneau)
       data = room.to_dto
 
       # Then
