@@ -20,10 +20,10 @@ module Hiring
       recruiter = @recruiter_repository.find_by_id(request.recruiter_id)
 
       # When
-      report = Report.new(interview, recruiter)
+      report = Report.write(interview, recruiter)
 
       # Then
-      report.write(request.report_body).to_dto.tap do |data|
+      report.to_dto.tap do |data|
         @repo.add(data)
       end
     end
