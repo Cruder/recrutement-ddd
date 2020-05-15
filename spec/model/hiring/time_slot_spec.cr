@@ -15,6 +15,14 @@ Spectator.describe Hiring::TimeSlot do
     end
   end
 
+  describe ".remerge" do
+    subject { described_class.remerge(time_slots)}
+
+    let(time_slots) { [Hiring::TimeSlot.new(Time.utc, Time.utc)] }
+
+    it { is_expected.to eq(time_slots) }
+  end
+
   describe "#initialize" do
     context "from DTO" do
       subject { described_class.new(data) }

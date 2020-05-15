@@ -10,6 +10,18 @@ module Hiring
       {beginning, ending}
     end
 
+    def self.remerge(timeslots : Array(TimeSlot))
+      times = timeslots.sort { |a, b| a.start_at <=> b.start_at }
+      times.reduce(Array(TimeSlot).new) do |acc, time|
+        if acc.last?.try(&.end_at) == time.start_at
+          last_time = acc.pop
+          acc << TimeSlot.new(last_time.start_at, time.end_at)
+        else
+          acc << time
+        end
+      end
+    end
+
     def initialize(availability : DTO::TimeSlot)
       initialize(availability.start_at, availability.end_at)
     end
