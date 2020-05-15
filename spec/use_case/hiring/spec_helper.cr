@@ -50,7 +50,3 @@ end
 class RoomMemoryRepository < RoomRepository
   include InMemory::Repository(DTO::Room)
 end
-
-class ReportMemoryRepository < ReportRepository
-  include InMemory::Repository(DTO::Report)
-end
