@@ -2,10 +2,10 @@ require "./spec_helper"
 
 Spectator.describe Hiring::CancelInterview do
   double :request do
-    stub interview_id
-    stub recruiter_id
-    stub candidate_id
-    stub room_id
+    stub interview_id : Int32
+    stub recruiter_id : Int32
+    stub candidate_id : Int32
+    stub room_id : Int32
   end
 
   subject { instance.call(request) }
@@ -32,8 +32,9 @@ Spectator.describe Hiring::CancelInterview do
 
     it { is_expected.to be_truthy }
     it "cancels the interview" do
-      expect { subject }.to_not change { interview_repository.all.size }
-      # expect(interview_repository.find_by_id(1).status).to eq Interview::Status::Canceled
+      subject
+      expect(interview_repository.all.size).to eq 1
+      expect(interview_repository.find_by_id(1).status).to eq "canceled"
     end
   end
 
@@ -42,8 +43,9 @@ Spectator.describe Hiring::CancelInterview do
 
     it { is_expected.to be_truthy }
     it "cancels the interview" do
-      expect { subject }.to change { interview_repository.all.size }
-      # expect(interview_repository.find_by_id(1).status).to eq Interview::Status::Canceled
+      subject
+      expect(interview_repository.all.size).to eq 1
+      expect(interview_repository.find_by_id(1).status).to eq "canceled"
     end
   end
 end
