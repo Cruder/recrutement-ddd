@@ -17,7 +17,7 @@ module Hiring
     end
 
     def initialize(
-      @id : Int32??,
+      @id : Int32?,
       @candidate : Candidate,
       @recruiter : Recruiter,
       @status : Status
