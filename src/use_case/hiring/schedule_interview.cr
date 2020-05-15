@@ -29,6 +29,7 @@ module Hiring
       # When
       interview = Interview.plan(candidate, recruiters)
       data = interview.to_dto
+      # room
 
       # Then
       @interview_repository.add(data)
@@ -37,3 +38,14 @@ module Hiring
     end
   end
 end
+
+# 4 cas d'utilisation
+# anuler
+# plan
+# confirm
+# re-plan
+
+# room
+#
+# reserve
+# release

@@ -7,3 +7,6 @@ module Hiring
     end
   end
 end
+# computer
+# size
+# horaire
