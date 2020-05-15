@@ -21,11 +21,11 @@ Spectator.describe Hiring::CancelInterview do
   let(interview) { DTO::Interview.new(1, interview_status) }
   let(candidate) { DTO::Candidate.new(1, "Arthur", [skill], availability, 1) }
   let(recruiter) { DTO::Recruiter.new(1, "Mathieu", [skill], [availability], 5) }
-  let(room) { DTO::Room.new(1, "Big room") }
+  let(room) { DTO::Room.new(1, "Big room", [booked_date]) }
 
   let(skill) { DTO::Skill.new(1, "java") }
   let(availability) { DTO::Availability.new(Time.utc(2020, 1, 1, 18), Time.utc(2020, 1, 1, 20)) }
-
+  let(booked_date) { DTO::Availability.new(Time.utc(2020, 1, 1, 18), Time.utc(2020, 1, 1, 20)) }
 
   context "with a pending interview" do
     let(interview_status) { "pending" }

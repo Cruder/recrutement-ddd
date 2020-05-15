@@ -27,7 +27,6 @@ module Hiring
       room_dto = @room_repository.find_by_id(request.room_id)
       interview_dto = @interview_repository.find_by_id(request.interview_id)
 
-
       # When
       canceled_interview = Interview.new(interview_dto, candidate_dto, recruiter_dto).cancel
       data = canceled_interview.to_dto
