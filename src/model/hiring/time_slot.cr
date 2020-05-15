@@ -1,5 +1,7 @@
 module Hiring
   class TimeSlot
+    MAX_DURATION = Time::Span.new(hours: 3)
+
     protected getter start_at : Time
     protected getter end_at : Time
 
@@ -30,6 +32,9 @@ module Hiring
       raise "Starts on weekend" if @start_at.saturday? || @start_at.sunday?
       raise "Ends on weekend" if @end_at.saturday? || @end_at.sunday?
       raise "end_at must be greater than start_at" if @end_at < @start_at
+      # Todo: Enable the 3 hours rule
+      # needs to modify tests to conform this rule
+      # raise "Duration too long" if @start_at - @end_at > MAX_DURATION
     end
 
     def match?(availability : TimeSlot)
